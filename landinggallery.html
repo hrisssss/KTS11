@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>haris's landing page</title>
+    <link rel="stylesheet" href="landing.css"/>
+  <!-- Google fonts (Playfair Display for headings, Poppins for UI) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="brand">Haris.</div>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">Tentang</a></li>
+        <li><a href="#works">Pengalaman</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <br>
+  <br>
+  <br>
+  <!-- HERO -->
+  <main id="home">
+    <section class="hero container">
+      <div class="content">
+        <h1>Hi, i'm haris <br> cloud security junior</h1>
+        <p class="lead">Saya adalah seorang cloud security junior. Dengan pengetahuan mendalam tentang berbagai platform cloud seperti AWS, saya berkomitmen untuk
+             melindungi aset digital dari ancaman siber yang terus berkembang.
+          .</p>
+        </p>
+        <div class="cta">
+          <button class="btn" onclick="document.getElementById('works').scrollIntoView({behavior:'smooth'})">Kunjungi pengalaman</button>
+          <button class="btn soft" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Kontak</button>
+        </div>
+      </div>
+    </section>
+<br>
+<br>
+    <section id="about" class="container">
+      <div class="section-title">About</div>
+      <p class="muted">Saya adalah Siswa lulusan SMK Telkom Sidoarjo Angkatan 7 2024.
+         Saya lahir pada 2009 oktober 17 dan berasal dari Sidoarjo, Saya selalu mengikuti perkembangan
+              terbaru dalam teknologi cloud dan praktik keamanan terbaik untuk memastikan bahwa sistem yang saya kelola tetap aman dan andal. 
+               Saya memiliki keterampilan dalam mengimplementasikan kebijakan keamanan, melakukan audit keamanan, serta merancang
+                solusi yang sesuai dengan kebutuhan bisnis. </p>
+    </section>
+
+    <!-- GALLERY (works) -->
+    <section id="works" class="container">
+      <div class="section-title">Works</div>
+      <p class="muted">Projek-projek & Portofolio saya</p>
+
+      <div class="gallery-wrap">
+        <div class="gallery" aria-label="Gallery">
+
+          <!-- optional little dots -->
+          <div class="dots" aria-hidden="true">
+            <div class="dot active"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
+          </div>
+
+          <!-- blurred previews row (behind nav) -->
+          <div class="bg-previews" id="bgPreviews" aria-hidden="true">
+            <div class="preview"><img src="6ede542df3645b031faf10cbff010553.jpg" alt=""></div>
+            <div class="preview"><img src="146f05bf31e3552c098034bb8b16eecd.jpg" alt=""></div>
+            <div class="preview"><img src="d81fd3fbacf3dc944814244dce402b31.jpg" alt=""></div>
+          </div>
+
+          <!-- main stage where slides appear -->
+          <div class="main-stage" id="mainStage" aria-live="polite">
+            <!-- slides (start with index 0 visible state is controlled by JS) -->
+            <div class="slide visible" data-index="0">
+              <img src="6ede542df3645b031faf10cbff010553.jpg" alt="">
+            </div>
+            <div class="slide" data-index="1">
+              <img src="146f05bf31e3552c098034bb8b16eecd.jpg" alt="">
+            </div>
+            <div class="slide" data-index="2">
+              <img src="d81fd3fbacf3dc944814244dce402b31.jpg" alt="">
+            </div>
+          </div>
+
+          <!-- dark glass nav (above previews) -->
+          <div class="nav-container" role="toolbar" aria-label="Gallery controls">
+            <button class="nav-btn icon" id="prevBtn" title="Previous" aria-label="Previous photo">⟨</button>
+            <button class="nav-btn preview" id="previewBtn" title="Preview image" aria-pressed="false">CLOSE</button>
+            <button class="nav-btn icon" id="nextBtn" title="Next" aria-label="Next photo">⟩</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="container">
+      <div class="section-title">Contact</div>
+      <p class="muted">Ingin kerja sama? Silahkan hubungi <strong><a href="https://mail.google.com/mail/u/0/?hl=en#inbox">rahmadharisaxsija@gmail.com</a></strong> Akan saya reply tidak lebih dari 1 hari.</p>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 haris. All rights reserved.
+  </footer>
+
+  <!-- ====== SCRIPT (gallery logic + slide animation) ====== -->
+  <script>
+    (function(){
+      // elements
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const previewBtn = document.getElementById('previewBtn');
+      const dots = Array.from(document.querySelectorAll('.dot'));
+      const bgPreviews = document.querySelectorAll('.bg-previews .preview');
+
+      let idx = 0;
+      let revealed = true; // start visible; you can set false to start hidden
+      const total = slides.length;
+      const lockDuration = 520; // match CSS transition time
+
+      // ensure initial state
+      function setVisible(i){
+        slides.forEach(s=>{
+          s.classList.remove('visible','to-left','to-right');
+          s.style.zIndex = 1;
+        });
+        const active = slides[i];
+        active.classList.add('visible');
+        active.style.zIndex = 2;
+        // update dots
+        dots.forEach((d,j)=> d.classList.toggle('active', j===i));
+        // subtle preview transform to indicate active
+        bgPreviews.forEach((p,j)=>{
+          p.style.transform = (j===i) ? 'scale(1.02) translateY(-6px)' : 'scale(1) translateY(0)';
+          p.style.filter = (j===i) ? 'blur(4px) contrast(1.02) saturate(1)':'blur(6px) contrast(0.9) saturate(0.9)';
+        });
+      }
+
+      setVisible(idx);
+
+      // slide left (to previous)
+      function goPrev(){
+        const from = idx;
+        const to = (idx - 1 + total) % total;
+        // place target to-left offscreen and make visible to animate
+        slides[to].classList.remove('to-left','to-right','visible');
+        slides[to].style.transform = 'translateX(-110%)';
+        // force reflow
+        void slides[to].offsetWidth;
+        // animate
+        slides[from].classList.add('to-right'); // current goes right
+        slides[to].classList.add('visible'); // incoming becomes visible
+        slides[to].style.transform = 'translateX(0)';
+        idx = to;
+        updateAfterMove();
+      }
+
+      // slide right (to next)
+      function goNext(){
+        const from = idx;
+        const to = (idx + 1) % total;
+        slides[to].classList.remove('to-left','to-right','visible');
+        slides[to].style.transform = 'translateX(110%)';
+        void slides[to].offsetWidth;
+        slides[from].classList.add('to-left'); // current goes left
+        slides[to].classList.add('visible'); // incoming
+        slides[to].style.transform = 'translateX(0)';
+        idx = to;
+        updateAfterMove();
+      }
+
+      // after move housekeeping
+      function updateAfterMove(){
+        // small timeout to clean classes after transition
+        setTimeout(()=>{
+          slides.forEach((s, i)=>{
+            s.classList.remove('to-left','to-right');
+            if(i===idx){
+              s.classList.add('visible');
+            } else {
+              s.classList.remove('visible');
+            }
+          });
+          setVisible(idx);
+        }, lockDuration);
+      }
+
+      // preview toggle (open/close main image)
+      function togglePreview(){
+        revealed = !revealed;
+        previewBtn.setAttribute('aria-pressed', String(revealed));
+        const mainStage = document.getElementById('mainStage');
+        if(revealed){
+          // show current slide with a small pop
+          slides[idx].classList.add('visible');
+          mainStage.style.transform = 'scale(1)';
+          previewBtn.textContent = 'CLOSE';
+        } else {
+          // hide all slides (scale down stage)
+          slides.forEach(s => s.classList.remove('visible'));
+          mainStage.style.transform = 'scale(0.96) translateY(6px)';
+          previewBtn.textContent = 'PREVIEW';
+        }
+      }
+
+      // attach
+      nextBtn.addEventListener('click', () => {
+        // ensure preview is open so user sees transition
+        if(!revealed){ togglePreview(); }
+        goNext();
+      });
+      prevBtn.addEventListener('click', () => {
+        if(!revealed){ togglePreview(); }
+        goPrev();
+      });
+      previewBtn.addEventListener('click', () => {
+        togglePreview();
+      });
+
+      // keyboard accessibility
+      document.addEventListener('keydown', (e)=>{
+        if(e.key === 'ArrowRight') nextBtn.click();
+        if(e.key === 'ArrowLeft') prevBtn.click();
+        if(e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); previewBtn.click(); }
+      });
+
+      // optional: auto-advance while preview opened (commented out)
+      // let auto;
+      // function startAuto(){ auto = setInterval(goNext, 5000); }
+      // function stopAuto(){ clearInterval(auto); }
+      // document.querySelector('.gallery').addEventListener('mouseenter', stopAuto);
+      // document.querySelector('.gallery').addEventListener('mouseleave', startAuto);
+      // startAuto();
+
+    })();
+  </script>
+</body>
+</html>
