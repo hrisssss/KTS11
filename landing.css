@@ -53,7 +53,7 @@ header {
   width: min(1180px, 94%);
   background: rgba(255, 255, 255, 0.75); /* Slightly more opaque for readability */
   backdrop-filter: blur(12px); /* Stronger blur for that glassmorphism look */
-  border-radius: 16px;
+  border-radius: 14px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   z-index: 1000; /* Ensure it stays above everything else */
   transition: all 0.3s ease; /* Smooth transition if you add scroll effects later */
@@ -79,7 +79,7 @@ nav a {
   color: var(--muted);
   font-weight: 600;
   padding: 6px 8px;
-  border-radius: 8px;
+  border-radius: 7px;
   transition: color 220ms, background 220ms;
 }
 
@@ -106,7 +106,7 @@ nav a:hover {
 .hero .content {
   max-width: 840px;
   padding: 40px;
-  border-radius: 18px;
+  border-radius: 14px;
   
   /* EFEK AWAN PURE CSS */
   background-color: #87CEEB; /* Warna dasar Biru Langit */
@@ -222,26 +222,20 @@ section {
   width: 100%;
   max-width: 980px;
   height: 520px;
-  /* Squircle-like radius untuk kesan Apple */
-  border-radius: 40px; 
+  border-radius: 14px;
   position: relative;
   overflow: hidden;
   
-  /* Background transparan dengan blur tinggi */
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
-  
-  /* Efek Liquid: Border tipis menyala & bayangan lembut */
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  /* EFEK MARMER PUTIH & EMAS (PURE CSS) */
+  background-color: #fdfcfb;
   box-shadow: 
-    0 25px 50px -12px rgba(0, 0, 0, 0.1),
-    inset 0 1px 1px rgba(255, 255, 255, 0.7),
-    inset 0 -1px 20px rgba(255, 255, 255, 0.1);
+    0 20px 40px rgba(0, 0, 0, 0.1),
+    inset 0 0 100px rgba(255, 255, 255, 0.5);
   
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.8);
 }
 
 .bg-previews {
@@ -257,8 +251,15 @@ section {
 }
 
 .bg-previews .preview {
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 220px;
+  height: 140px;
+  border-radius: 14px;
+  overflow: hidden;
+  filter: blur(6px) contrast(0.9) saturate(0.9);
+  transform: scale(1);
+  transition: transform 420ms;
+  box-shadow: 0 12px 30px rgba(12, 12, 12, 0.18);
+  opacity: 0.85;
 }
 
 .bg-previews .preview img {
@@ -329,28 +330,39 @@ section {
 
 .nav-container {
   position: absolute;
-  bottom: 30px;
+  bottom: 28px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 60;
   display: flex;
-  gap: 12px;
-  padding: 10px;
-  
-  /* Liquid Glass Pill */
-  background: rgba(20, 20, 20, 0.4);
-  backdrop-filter: blur(20px) saturate(150%);
-  border-radius: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  gap: 10px; /* Jarak antar tombol diperlebar */
+  align-items: center;
+  padding: 0; /* Hapus padding */
+  background: transparent; /* Hilangkan background bar */
+  backdrop-filter: none;
+  border: none;
+  box-shadow: none;
 }
 
 .nav-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  color: white;
-  border-radius: 16px;
-  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  /* Efek Glassmorphism untuk tiap tombol */
+  background: rgba(30, 30, 32, 0.85); 
+  backdrop-filter: blur(8px);
+  color: #b58f57; /* Warna Emas Premium */
+  
+  border: 1px solid rgba(181, 143, 87, 0.2); /* Border emas tipis */
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
 /* Ukuran khusus untuk tombol Icon (Panah) */
@@ -370,8 +382,11 @@ section {
 
 /* Efek Hover Individual */
 .nav-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
+  background: rgba(45, 45, 48, 0.95);
+  transform: translateY(-5px); /* Efek melompat sedikit */
+  border-color: rgba(181, 143, 87, 0.8); /* Border emas makin terang */
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+  color: #fff;
 }
 
 .nav-btn.preview:hover {
@@ -391,27 +406,39 @@ section {
 
 .dots {
   position: absolute;
-  top: 25px;
-  right: 25px;
+  top: 18px;
+  right: 18px;
+  z-index: 40;
   display: flex;
-  gap: 6px;
+  gap: 8px;
+  align-items: center; /* Keeps them centered vertically */
+  
+  /* ADD THESE LINES */
   padding: 8px 12px;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgb(255, 255, 255);
+  backdrop-filter: blur(4px);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(20, 20, 20, 0.249);
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.4);
-  border: none; /* Hilangkan border hitam sebelumnya */
+  width: 8px;
+  height: 8px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.6);
+  opacity: 0.5;
+  /* ADD THIS LINE */
+  border: 2px solid rgba(0, 0, 0, 0.1); 
 }
 
 .dot.active {
-  background: #fff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  opacity: 1;
+  background: var(--gold);
+  width: 8px;
+  height: 8px;
+  /* ADD THIS LINE to give the active gold dot a gold border */
+  border: 2px solid var(--gold); 
 }
 
 /* responsive */
