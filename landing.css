@@ -415,11 +415,10 @@ section {
   
   /* ADD THESE LINES */
   padding: 8px 12px;
-  background: rgb(255, 255, 255);
-  backdrop-filter: blur(4px);
-  border: 2px solid rgb(255, 255, 255);
-  border-radius: 14px;
-  box-shadow: 0 8px 24px rgba(20, 20, 20, 0.249);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .dot {
@@ -433,12 +432,8 @@ section {
 }
 
 .dot.active {
-  opacity: 1;
-  background: var(--gold);
-  width: 8px;
-  height: 8px;
-  /* ADD THIS LINE to give the active gold dot a gold border */
-  border: 2px solid var(--gold); 
+  background: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
 }
 
 /* responsive */
